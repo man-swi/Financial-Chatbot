@@ -98,6 +98,10 @@ st.markdown(
         border-radius: 10px;
         margin: 20px 0;
     }
+    .info-box p {
+        color: black;
+        font-size: 16px;
+    }
     .info-box ul {
         list-style-type: none;
         padding: 0;
@@ -112,6 +116,9 @@ st.markdown(
         }
         .info-box {
             background-color: #2e3a47;
+        }
+        .info-box p {
+            color: #ffffff;
         }
         .info-box li {
             color: #ffffff;
