@@ -75,7 +75,7 @@ def get_response(query):
     else:
         return f"Sorry, I couldn't find any data for {company.title()} in {year}."
 
-# Streamlit app
+# Streamlit app with dynamic styling
 st.markdown(
     """
     <style>
@@ -98,10 +98,24 @@ st.markdown(
         border-radius: 10px;
         margin: 20px 0;
     }
-    .info-box p {
+    .info-box ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .info-box li {
         font-size: 16px;
-        color: #333;
-        margin: 0;
+        margin: 5px 0;
+    }
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-color: #1e1e1e;
+        }
+        .info-box {
+            background-color: #2e3a47;
+        }
+        .info-box li {
+            color: #ffffff;
+        }
     }
     </style>
     """, unsafe_allow_html=True)
@@ -123,8 +137,6 @@ st.markdown(
         <p>Feel free to ask about their revenue, net income, assets, liabilities, and more!</p>
     </div>
     """, unsafe_allow_html=True)
-
-st.write("Explore financial metrics and trends with ease! Ask me anything about a company's performance.")
 
 # Input field for user query
 query = st.text_input("Your Question:", placeholder="E.g., What is the total revenue for Apple in 2021?", key="query")
