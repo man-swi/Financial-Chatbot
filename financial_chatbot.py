@@ -1,25 +1,17 @@
-import os
 import pandas as pd
 import streamlit as st
 import spacy
 import re
-from spacy.cli import download
 
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_sm")
 
+# Apply page configuration
 st.set_page_config(page_title="Financial Chatbot", layout="wide", initial_sidebar_state="expanded")
 
+# Load your dataset
 @st.cache_data
 def load_data():
-    file_path = "financial_data.csv"
-    if not os.path.exists(file_path):
-        st.error(f"File '{file_path}' not found. Please upload the correct file to the directory.")
-        st.stop()  # Stop the app if the file is missing
-    data = pd.read_csv(file_path)
+    data = pd.read_csv("financial_data.csv")
     data["Revenue Growth (%)"] = data.groupby("Company")["Total Revenue ($B)"].pct_change() * 100
     data["Debt-to-Assets Ratio"] = (data["Total Liabilities ($B)"] / data["Total Assets ($B)"]) * 100
     data["ROA (%)"] = (data["Net Income ($B)"] / data["Total Assets ($B)"]) * 100
