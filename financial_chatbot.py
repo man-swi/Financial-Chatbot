@@ -2,13 +2,18 @@ import pandas as pd
 import streamlit as st
 import spacy
 import re
+from spacy.cli import download  
 
-nlp = spacy.load("en_core_web_sm")
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
-# Apply page configuration
+# page configuration
 st.set_page_config(page_title="Financial Chatbot", layout="wide", initial_sidebar_state="expanded")
 
-# Load your dataset
+
 @st.cache_data
 def load_data():
     data = pd.read_csv("financial_data.csv")
