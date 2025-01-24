@@ -16,7 +16,9 @@ st.set_page_config(page_title="Financial Chatbot", layout="wide", initial_sideba
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv("financial_data.csv")
+    
+    data = pd.read_csv("D:\BCG\Financial_data.csv")
+  
     data["Revenue Growth (%)"] = data.groupby("Company")["Total Revenue ($B)"].pct_change() * 100
     data["Debt-to-Assets Ratio"] = (data["Total Liabilities ($B)"] / data["Total Assets ($B)"]) * 100
     data["ROA (%)"] = (data["Net Income ($B)"] / data["Total Assets ($B)"]) * 100
